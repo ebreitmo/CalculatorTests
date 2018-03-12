@@ -11,13 +11,25 @@ namespace ClassLibrary1
     [TestFixture]
     public class Class1
     {
+        ICalculator sut;
+        [SetUp]
+        public void TestSetup()
+        {
+            sut = new Calculator.Calculator();
+        }
+
         [Test]
         public void ShouldAddTwoNumbers()
         {
-            ICalculator sut = new Calculator.Calculator();
-            int expectedRes = sut.Add(6,7);
+            int expectedRes = sut.Add(6, 7);
             Assert.That(expectedRes, Is.EqualTo(13));
         }
+       [TearDown]
+       public void TestTearDown()
+        {
+            sut = null;
+        }
+       
 
     }
 }
